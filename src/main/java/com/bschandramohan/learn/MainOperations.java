@@ -1,6 +1,6 @@
 package com.bschandramohan.learn;
 
-public class TryExecutorsUtil {
+public class MainOperations {
     public static long getArithmeticProgressionSum(int startNumber, int difference, long count) {
         System.out.printf("Starting ArithmeticProgression Sum with parameters startNumber=%d, difference=%d, count=%d; Thread=%s %n", startNumber, difference, count, Thread.currentThread().getName());
 

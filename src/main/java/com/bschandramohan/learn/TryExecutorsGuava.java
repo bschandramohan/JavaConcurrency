@@ -1,5 +1,6 @@
 package com.bschandramohan.learn;
 
+import com.bschandramohan.learn.util.Utils;
 import com.google.common.util.concurrent.*;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class TryExecutorsGuava {
 
     // Runs in main thread
     private void runDirectExecutor() {
-        directExecutor.execute(() -> TryExecutorsUtil.getArithmeticProgressionSum(1, 2, 1));
+        directExecutor.execute(() -> MainOperations.getArithmeticProgressionSum(1, 2, 1));
     }
 
     private void runExitingExecutorService() {
@@ -27,7 +28,7 @@ public class TryExecutorsGuava {
     private void runListenableFutureWithGet() throws ExecutionException, InterruptedException {
         //Listenable Future
         ListenableFuture listenableFuture = listeningExecutorService.submit(() ->
-                TryExecutorsUtil.getArithmeticProgressionSum(1, 2, 10));
+                MainOperations.getArithmeticProgressionSum(1, 2, 10));
 
         //Listenable Future - GET
         System.out.printf("Done=%b Cancelled=%b %n", listenableFuture.isDone(), listenableFuture.isCancelled());
@@ -37,7 +38,7 @@ public class TryExecutorsGuava {
 
     private void runListenableFutureWithListener() {
         ListenableFuture listenableFuture = listeningExecutorService.submit(() ->
-                TryExecutorsUtil.getArithmeticProgressionSum(1, 3, 10));
+                MainOperations.getArithmeticProgressionSum(1, 3, 10));
 
         // Listenable Future - AddListener to get callback on completion
         listenableFuture.addListener(() -> {
@@ -51,7 +52,7 @@ public class TryExecutorsGuava {
 
     private void runListenableFutureWithFutureCallback() {
         ListenableFuture listenableFuture = listeningExecutorService.submit(() ->
-                TryExecutorsUtil.getArithmeticProgressionSum(1, 4, 10));
+                MainOperations.getArithmeticProgressionSum(1, 4, 10));
 
         Futures.addCallback(listenableFuture, new FutureCallback<Long>() {
             @Override
@@ -68,13 +69,13 @@ public class TryExecutorsGuava {
 
     private void runListenableFutureWithFutureAllAsList() throws ExecutionException, InterruptedException {
         ListenableFuture listenableFuture1 = listeningExecutorService.submit(() ->
-                TryExecutorsUtil.getArithmeticProgressionSum(1, 2, 100000000));
+                MainOperations.getArithmeticProgressionSum(1, 2, 100000000));
 
         ListenableFuture listenableFuture2 = listeningExecutorService.submit(() ->
-                TryExecutorsUtil.getArithmeticProgressionSum(1, 3, 10000000));
+                MainOperations.getArithmeticProgressionSum(1, 3, 10000000));
 
         ListenableFuture listenableFuture3 = listeningExecutorService.submit(() ->
-                TryExecutorsUtil.getArithmeticProgressionSum(1, 4, 1000000000));
+                MainOperations.getArithmeticProgressionSum(1, 4, 1000000000));
 
         Utils.logMessage("Before Futures.allAsList");
         ListenableFuture<List<Long>> listenableFutures = Futures.allAsList(listenableFuture1, listenableFuture2, listenableFuture3);

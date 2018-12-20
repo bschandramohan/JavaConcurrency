@@ -12,10 +12,10 @@ public class TryExecutorsFuture {
     private static void performOperations(ExecutorService executorService) throws InterruptedException, ExecutionException {
         System.out.printf("\n\nMain Start; ExecutorType=%s; Thread=%s %n",executorService.toString(), Thread.currentThread().getName());
 
-        Future<Long> sum1 = executorService.submit(() -> TryExecutorsUtil.getArithmeticProgressionSum(1, 2, 100));
-        Future<Long> product1 = executorService.submit(() -> TryExecutorsUtil.getGeometricProgressionSum(1, 2, 10000));
-        Future<Long> sum2 = executorService.submit(() -> TryExecutorsUtil.getArithmeticProgressionSum(1, 2, 10));
-        Future<Long> product2 = executorService.submit(() -> TryExecutorsUtil.getGeometricProgressionSum(1, 2, 1001));
+        Future<Long> sum1 = executorService.submit(() -> MainOperations.getArithmeticProgressionSum(1, 2, 100));
+        Future<Long> product1 = executorService.submit(() -> MainOperations.getGeometricProgressionSum(1, 2, 10000));
+        Future<Long> sum2 = executorService.submit(() -> MainOperations.getArithmeticProgressionSum(1, 2, 10));
+        Future<Long> product2 = executorService.submit(() -> MainOperations.getGeometricProgressionSum(1, 2, 1001));
 
         executorService.shutdown();
 

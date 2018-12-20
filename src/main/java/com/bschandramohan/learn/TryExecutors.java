@@ -20,10 +20,10 @@ public class TryExecutors {
 
     private static void performOperations(ExecutorService executorService) throws InterruptedException {
         System.out.printf("\n\nMain Start; ExecutorType=%s; Thread=%s  %n",executorService.toString(), Thread.currentThread().getName());
-        executorService.submit(() -> System.out.printf("Sum=%d %n", TryExecutorsUtil.getArithmeticProgressionSum(1, 2, 100)));
-        executorService.submit(() -> System.out.printf("Product=%d %n", TryExecutorsUtil.getGeometricProgressionSum(1, 2, 10000)));
-        executorService.submit(() -> System.out.printf("Sum=%d %n", TryExecutorsUtil.getArithmeticProgressionSum(1, 2, 10)));
-        executorService.submit(() -> System.out.printf("Product=%d %n", TryExecutorsUtil.getGeometricProgressionSum(1, 2, 1001)));
+        executorService.submit(() -> System.out.printf("Sum=%d %n", MainOperations.getArithmeticProgressionSum(1, 2, 100)));
+        executorService.submit(() -> System.out.printf("Product=%d %n", MainOperations.getGeometricProgressionSum(1, 2, 10000)));
+        executorService.submit(() -> System.out.printf("Sum=%d %n", MainOperations.getArithmeticProgressionSum(1, 2, 10)));
+        executorService.submit(() -> System.out.printf("Product=%d %n", MainOperations.getGeometricProgressionSum(1, 2, 1001)));
 
         executorService.shutdown();
 //        tryExecutor.singleThreadExecutor.shutdownNow();

@@ -1,4 +1,4 @@
-package com.bschandramohan.learn;
+package com.bschandramohan.learn.util;
 
 import java.util.Calendar;
 
