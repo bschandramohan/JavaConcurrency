@@ -87,6 +87,24 @@ public class TryExecutorsGuava {
         }
     }
 
+    private void runListenableFutureWithFutureAllAsListCollect() throws ExecutionException, InterruptedException {
+        ListenableFuture listenableFuture1 = listeningExecutorService.submit(() ->
+                MainOperations.getArithmeticProgressionSum(1, 2, 100000000));
+
+        ListenableFuture listenableFuture2 = listeningExecutorService.submit(() ->
+                MainOperations.getArithmeticProgressionSum(1, 3, 10000000));
+
+        ListenableFuture listenableFuture3 = listeningExecutorService.submit(() ->
+                MainOperations.getArithmeticProgressionSum(1, 4, 1000000000));
+
+        Utils.logMessage("Before Futures.allAsList");
+        ListenableFuture<List<Long>> listenableFutures = Futures.allAsList(listenableFuture1, listenableFuture2, listenableFuture3);
+
+        Utils.logMessage("Before Futures.get");
+        listenableFutures.get().stream().forEach(element -> System.out.printf("Result=%d %n", element));
+        Utils.logMessage("After Futures.get");
+    }
+
     private void terminate() {
         listeningExecutorService.shutdown();
     }
@@ -94,17 +112,19 @@ public class TryExecutorsGuava {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         TryExecutorsGuava tryExecutorsGuava = new TryExecutorsGuava();
 
-        tryExecutorsGuava.runDirectExecutor();
+//        tryExecutorsGuava.runDirectExecutor();
+//
+//        tryExecutorsGuava.runExitingExecutorService();
+//
+//        tryExecutorsGuava.runListenableFutureWithGet();
+//
+//        tryExecutorsGuava.runListenableFutureWithListener();
+//
+//        tryExecutorsGuava.runListenableFutureWithFutureCallback();
+//
+//        tryExecutorsGuava.runListenableFutureWithFutureAllAsList();
 
-        tryExecutorsGuava.runExitingExecutorService();
-
-        tryExecutorsGuava.runListenableFutureWithGet();
-
-        tryExecutorsGuava.runListenableFutureWithListener();
-
-        tryExecutorsGuava.runListenableFutureWithFutureCallback();
-
-        tryExecutorsGuava.runListenableFutureWithFutureAllAsList();
+        tryExecutorsGuava.runListenableFutureWithFutureAllAsListCollect();
 
         tryExecutorsGuava.terminate();
     }

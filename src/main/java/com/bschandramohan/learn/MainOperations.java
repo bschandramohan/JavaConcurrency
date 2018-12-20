@@ -1,5 +1,9 @@
 package com.bschandramohan.learn;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainOperations {
     public static long getArithmeticProgressionSum(int startNumber, int difference, long count) {
         System.out.printf("Starting ArithmeticProgression Sum with parameters startNumber=%d, difference=%d, count=%d; Thread=%s %n", startNumber, difference, count, Thread.currentThread().getName());
@@ -35,5 +39,11 @@ public class MainOperations {
         System.out.printf("Sum of 1,3,5,7...; result=%s %n", getArithmeticProgressionSum(1, 2, 4));
         System.out.printf("Sum of 1,2,4,8,16...; result=%s %n", getGeometricProgressionSum(1, 2, 10));
         System.out.printf("Sum of 1,3,9,27...; result=%s %n", getGeometricProgressionSum(1, 3, 4));
+
+        // Just another way - using Streams
+
+        List<Integer> counts = new ArrayList<>(Arrays.asList(10, 100000, 200, 100));
+        counts.parallelStream().forEach(value -> System.out.printf("Sum of 1,3,5,7...; result=%d %n", getArithmeticProgressionSum(1, 2, value)));
+
     }
 }
