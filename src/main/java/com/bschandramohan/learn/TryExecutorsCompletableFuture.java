@@ -2,7 +2,7 @@ package com.bschandramohan.learn;
 
 import java.util.concurrent.*;
 
-public class TryExecutorsFuture {
+public class TryExecutorsCompletableFuture {
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         // For Single Thread executor reference, check TryExecutors.java
@@ -13,7 +13,7 @@ public class TryExecutorsFuture {
         System.out.printf("\n\nMain Start; ExecutorType=%s; Thread=%s %n",executorService.toString(), Thread.currentThread().getName());
 
         Future<Long> sum1 = executorService.submit(() -> MainOperations.getArithmeticProgressionSum(1, 2, 100));
-        Future<Long> product1 = executorService.submit(() -> MainOperations.getGeometricProgressionSum(1, 2, 1000));
+        Future<Long> product1 = executorService.submit(() -> MainOperations.getGeometricProgressionSum(1, 2, 10000));
         Future<Long> sum2 = executorService.submit(() -> MainOperations.getArithmeticProgressionSum(1, 2, 10));
         Future<Long> product2 = executorService.submit(() -> MainOperations.getGeometricProgressionSum(1, 2, 1001));
 

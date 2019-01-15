@@ -11,25 +11,26 @@ public class TryExecutors {
         ExecutorService fixedThreadExecutor = Executors.newFixedThreadPool(2);
         ExecutorService cachedThreadExecutor = Executors.newCachedThreadPool();
 
-        performOperations(singleThreadExecutor);
+        performOperations(singleThreadExecutor, "SingleThread");
 
-        performOperations(fixedThreadExecutor);
+        performOperations(fixedThreadExecutor, "FixedThread");
 
-        performOperations(cachedThreadExecutor);
+        performOperations(cachedThreadExecutor, "CachedThread");
     }
 
-    private static void performOperations(ExecutorService executorService) throws InterruptedException {
-        System.out.printf("\n\nMain Start; ExecutorType=%s; Thread=%s  %n",executorService.toString(), Thread.currentThread().getName());
-        executorService.submit(() -> System.out.printf("Sum=%d %n", MainOperations.getArithmeticProgressionSum(1, 2, 100)));
-        executorService.submit(() -> System.out.printf("Product=%d %n", MainOperations.getGeometricProgressionSum(1, 2, 10000)));
-        executorService.submit(() -> System.out.printf("Sum=%d %n", MainOperations.getArithmeticProgressionSum(1, 2, 10)));
-        executorService.submit(() -> System.out.printf("Product=%d %n", MainOperations.getGeometricProgressionSum(1, 2, 1001)));
+    private static void performOperations(ExecutorService executorService, String executorType) throws InterruptedException {
+        System.out.printf("\n\nMain Start; ExecutorTypeString=%s ExecutorType=%s; Thread=%s  %n", executorType, executorService.toString(), Thread.currentThread().getName());
+
+        executorService.submit(() -> System.out.printf("SUM_AP=%d %n", MainOperations.getArithmeticProgressionSum(1, 2, 100)));
+        executorService.submit(() -> System.out.printf("SUM_GP=%d %n", MainOperations.getGeometricProgressionSum(1, 2, 10000)));
+        executorService.submit(() -> System.out.printf("SUM_AP=%d %n", MainOperations.getArithmeticProgressionSum(1, 2, 10)));
+        executorService.submit(() -> System.out.printf("SUM_GP=%d %n", MainOperations.getGeometricProgressionSum(1, 2, 1001)));
 
         executorService.shutdown();
 //        tryExecutor.singleThreadExecutor.shutdownNow();
-        System.out.printf("Main Finished; ExecutorType=%s; Thread=%s  %n",executorService.toString(), Thread.currentThread().getName());
+        System.out.printf("Main Finished; ExecutorTypeString=%s ExecutorType=%s; Thread=%s  %n", executorType, executorService.toString(), Thread.currentThread().getName());
 
         // Required to avoid confusion in reading output with other executors later
-        executorService.awaitTermination(5, TimeUnit.SECONDS);
+        executorService.awaitTermination(2, TimeUnit.SECONDS);
     }
 }

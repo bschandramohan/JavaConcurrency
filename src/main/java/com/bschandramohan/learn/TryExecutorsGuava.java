@@ -1,6 +1,6 @@
 package com.bschandramohan.learn;
 
-import com.bschandramohan.learn.util.Utils;
+import com.bschandramohan.learn.util.LogUtil;
 import com.google.common.util.concurrent.*;
 
 import java.util.List;
@@ -77,11 +77,11 @@ public class TryExecutorsGuava {
         ListenableFuture listenableFuture3 = listeningExecutorService.submit(() ->
                 MainOperations.getArithmeticProgressionSum(1, 4, 1000000000));
 
-        Utils.logMessage("Before Futures.allAsList");
+        LogUtil.logMessage("Before Futures.allAsList");
         ListenableFuture<List<Long>> listenableFutures = Futures.allAsList(listenableFuture1, listenableFuture2, listenableFuture3);
-        Utils.logMessage("Before Futures.get");
+        LogUtil.logMessage("Before Futures.get");
         List<Long> results = listenableFutures.get(); // blocking call
-        Utils.logMessage("After Futures.get");
+        LogUtil.logMessage("After Futures.get");
         for(int i = 0; i < results.size(); i++) {
             System.out.printf("Sum[%d]=%d %n", i, results.get(i));
         }
@@ -97,12 +97,12 @@ public class TryExecutorsGuava {
         ListenableFuture listenableFuture3 = listeningExecutorService.submit(() ->
                 MainOperations.getArithmeticProgressionSum(1, 4, 1000000000));
 
-        Utils.logMessage("Before Futures.allAsList");
+        LogUtil.logMessage("Before Futures.allAsList");
         ListenableFuture<List<Long>> listenableFutures = Futures.allAsList(listenableFuture1, listenableFuture2, listenableFuture3);
 
-        Utils.logMessage("Before Futures.get");
+        LogUtil.logMessage("Before Futures.get");
         listenableFutures.get().stream().forEach(element -> System.out.printf("Result=%d %n", element));
-        Utils.logMessage("After Futures.get");
+        LogUtil.logMessage("After Futures.get");
     }
 
     private void terminate() {
