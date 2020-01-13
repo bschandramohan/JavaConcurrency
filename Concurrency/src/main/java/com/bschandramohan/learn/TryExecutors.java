@@ -7,9 +7,9 @@ import java.util.concurrent.TimeUnit;
 public class TryExecutors {
 
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-        ExecutorService fixedThreadExecutor = Executors.newFixedThreadPool(2);
-        ExecutorService cachedThreadExecutor = Executors.newCachedThreadPool();
+        ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor(); // Single Thread executed sequentially
+        ExecutorService fixedThreadExecutor = Executors.newFixedThreadPool(2); // 2 Threads pool used
+        ExecutorService cachedThreadExecutor = Executors.newCachedThreadPool(); // Cached Pool - new threads created as needed, isn't closed on finish
 
         performOperations(singleThreadExecutor, "SingleThread");
 

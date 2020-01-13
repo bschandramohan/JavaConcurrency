@@ -21,7 +21,7 @@ public class MainOperations {
     }
 
     public static long getGeometricProgressionSum(int startNumber, int factor, long count) {
-        System.out.format("%nStarting GeometricProgression Sum with parameters startNumber=%d, factor=%d, count=%d; Thread=%s %n", startNumber, factor, count, Thread.currentThread().getName());
+        System.out.printf("%nStarting GeometricProgression Sum with parameters startNumber=%d, factor=%d, count=%d; Thread=%s %n", startNumber, factor, count, Thread.currentThread().getName());
 
         int sum = startNumber;
         int previousNumber = startNumber;
@@ -43,6 +43,5 @@ public class MainOperations {
         // Just another way - using Streams
         List<Integer> counts = new ArrayList<>(Arrays.asList(10, 100, 20, 101));
         counts.parallelStream().forEach(value -> System.out.printf("Sum of 1,3,5,7...; result=%d %n", getArithmeticProgressionSum(1, 2, value)));
-
     }
 }

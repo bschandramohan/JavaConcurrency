@@ -17,16 +17,18 @@ public class TryExecutorsFuture {
         Future<Long> sum2 = executorService.submit(() -> MainOperations.getArithmeticProgressionSum(1, 2, 10));
         Future<Long> product2 = executorService.submit(() -> MainOperations.getGeometricProgressionSum(1, 2, 1001));
 
+        // Shutdown - submitted tasks are executed, but no new tasks will be accepted.
         executorService.shutdown();
 
-        // Display the futures - Executor Service might not have finished
+        // Display the futures - Executor Service might not have finished;
+        // Most of the isDone() below will return false
         System.out.printf("Sum1=%s; isDone()=%b %n", sum1, sum1.isDone());
         System.out.printf("Product1=%s; isDone()=%b %n", product1, product1.isDone());
         System.out.printf("Sum2=%s; isDone()=%b %n", sum2, sum2.isDone());
         System.out.printf("Product2=%s; isDone()=%b %n", product2, product2.isDone());
 
         // Cancel product2 computation
-        System.out.printf("%nCancelling Product 2 computation; Status=%b %n", product2.cancel(true));
+        System.out.printf("%nCancelling Product 2 computation; isDone=%b Status=%b %n", product2.isDone(), product2.cancel(true));
 
         System.out.printf("%nShutdown=%b Terminated=%b %n", executorService.isShutdown(), executorService.isTerminated());
         executorService.awaitTermination(5, TimeUnit.SECONDS);
